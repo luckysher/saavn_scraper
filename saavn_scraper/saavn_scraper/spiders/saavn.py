@@ -10,7 +10,8 @@ from ..itemModels.album import Album
 class SaavnSpider(scrapy.Spider):
     name = 'saavn'
     allowed_domains = ['www.saavn.com']
-    start_urls = ['https://www.saavn.com/new-releases/hindi']
+    start_urls = ['https://www.saavn.com/new-releases/hindi',
+                  'https://www.saavn.com/radio/hindi']
 
     def __init__(self):
         self.loggerName = self.__class__.__name__
@@ -30,6 +31,10 @@ class SaavnSpider(scrapy.Spider):
             self.showAlbumDetails(album)
         self.logger.debug("[%s]=============================================================" % self.loggerName)
 
-    def parse(self, response):
+    def parseAlbums(self, response):
         self.logger.debug("[%s] Fetching latest movie titles from 'www.saavn.com'" % self.loggerName)
         self.fetchLatestAlbums(response.text)
+
+    def parseRadio(self, response):
+        self.logger.debug("[%s] Fetching latest Radio from 'www.saavn.com'" % self.loggerName)
+        self.fetchLatestRadio(response.text)
