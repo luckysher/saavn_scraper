@@ -25,6 +25,8 @@ class SaavnSpider(scrapy.Spider):
         for num, album_detail in enumerate(albumData):
             album = Album()
             albm = Selector(text=album_detail)
+            album['num'], album['title'], album['artist'] = num+1, albm.xpath('//p/text()').extract_first(), albm.xpath('//span/text()').extract_first()
+
             self.showAlbumDetails(album)
         self.logger.debug("[%s]=============================================================" % self.loggerName)
 
