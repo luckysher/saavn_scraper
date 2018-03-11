@@ -10,11 +10,14 @@ from ..itemModels.album import Album
 class SaavnSpider(scrapy.Spider):
     name = 'saavn'
     allowed_domains = ['www.saavn.com']
-    start_urls = ['https://www.saavn.com/new-releases/hindi',
-                  'https://www.saavn.com/radio/hindi']
+
 
     def __init__(self):
         self.loggerName = self.__class__.__name__
+
+    def start_requests(self):
+        yield scrapy.FormRequest('https://www.saavn.com/new-releases/hindi', callback=self.parseAlbums)
+        yield scrapy.FormRequest('https://www.saavn.com/radio/hindi', callback=self.parseRadio)
 
     def showAlbumDetails(self, album):
         self.logger.debug("[%s] ==> Id: %d   Title: '%s' Artist: '%s'" % (self.loggerName, album['num'], album['title'], album['artist']))
@@ -37,4 +40,4 @@ class SaavnSpider(scrapy.Spider):
 
     def parseRadio(self, response):
         self.logger.debug("[%s] Fetching latest Radio from 'www.saavn.com'" % self.loggerName)
-        self.fetchLatestRadio(response.text)
+        #self.fetchLatestRadio(response.text)
