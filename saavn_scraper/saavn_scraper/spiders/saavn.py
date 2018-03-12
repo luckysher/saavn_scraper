@@ -38,6 +38,7 @@ class SaavnSpider(scrapy.Spider):
         self.logger.debug("[%s] Fetching latest movie titles from 'www.saavn.com'" % self.loggerName)
         self.fetchLatestAlbums(response.text)
 
+    # method for fetching radio list
     def parseRadio(self, response):
         self.logger.debug("[%s] Fetching latest Radio from 'www.saavn.com'" % self.loggerName)
         #self.fetchLatestRadio(response.text)
