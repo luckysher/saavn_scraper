@@ -4,7 +4,7 @@
 
 import scrapy
 from scrapy.selector import Selector
-from ..itemModels.album import Album
+from ..itemModels.album import *
 
 
 class SaavnSpider(scrapy.Spider):
@@ -42,7 +42,12 @@ class SaavnSpider(scrapy.Spider):
         self.logger.debug("[%s]=====================Saavn Radio list ========================================" % self.loggerName)
         # fetch albums details
         radioData = Selector(text=text).xpath('//div[contains(@class, "album-details")]').extract()
-        
+        for num, radio_detail in enumerate(radioData):
+            radio = Radio()
+            rdo = Selector(text=radio_detail)
+            radio['num'], radio['name'] = num+1, rdo.xpath('//p/text()').extract_first()
+
+            self.showDetails(rdo)
         self.logger.debug("[%s]=============================================================" % self.loggerName)
 
     # method for fetching radio list
