@@ -7,3 +7,6 @@ class Album(scrapy.Item):
     title = scrapy.Field()
     artist = scrapy.Field()
 
+class Radio(scrapy.Item):
+    num = scrapy.Field()
+    name = scrapy.Field()
