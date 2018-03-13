@@ -38,7 +38,14 @@ class SaavnSpider(scrapy.Spider):
         self.logger.debug("[%s] Fetching latest movie titles from 'www.saavn.com'" % self.loggerName)
         self.fetchLatestAlbums(response.text)
 
+    def fetchLatestRadio(self, text):
+        self.logger.debug("[%s]=====================Saavn Radio list ========================================" % self.loggerName)
+        # fetch albums details
+        radioData = Selector(text=text).xpath('//div[contains(@class, "album-details")]').extract()
+        
+        self.logger.debug("[%s]=============================================================" % self.loggerName)
+
     # method for fetching radio list
     def parseRadio(self, response):
         self.logger.debug("[%s] Fetching latest Radio from 'www.saavn.com'" % self.loggerName)
-        #self.fetchLatestRadio(response.text)
+        self.fetchLatestRadio(response.text)
