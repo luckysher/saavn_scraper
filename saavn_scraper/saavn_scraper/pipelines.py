@@ -19,3 +19,6 @@ class AlbumPipeline(object):
         self.file.write(line)
         return item
 
+    def close_spider(self, spider):
+        print('closing spider..')
+        self.file.close()
