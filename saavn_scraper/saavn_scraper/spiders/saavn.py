@@ -4,6 +4,7 @@
 
 import scrapy
 from scrapy.selector import Selector
+from scrapy.loader import ItemLoader
 from ..itemModels.album import *
 
 
@@ -32,6 +33,7 @@ class SaavnSpider(scrapy.Spider):
         for num, album_detail in enumerate(albumData):
             album = Album()
             albm = Selector(text=album_detail)
+            # load data to items
             album['num'], album['title'], album['artist'] = num+1, albm.xpath('//p/text()').extract_first(), albm.xpath('//span/text()').extract_first()
 
             self.showAlbumDetails(album)
@@ -41,19 +43,17 @@ class SaavnSpider(scrapy.Spider):
         self.logger.debug("[%s] Fetching latest movie titles from 'www.saavn.com'" % self.loggerName)
         self.fetchLatestAlbums(response.text)
 
-    def fetchLatestRadio(self, text):
+    def fetchLatestRadio(self, response):
         self.logger.debug("[%s]=====================Saavn Radio list ========================================" % self.loggerName)
         # fetch albums details
-        radioData = Selector(text=text).xpath('//div[contains(@class, "album-details")]').extract()
-        for num, radio_detail in enumerate(radioData):
-            radio = Radio()
-            rdo = Selector(text=radio_detail)
-            radio['num'], radio['name'] = num+1, rdo.xpath('//p/text()').extract_first()
+        radioLoader = ItemLoader(item=Radio(), response=response)
+        radioLoader.add_xpath('name', '//div[contains(@class, "album-details")]/p/text()')
 
-            self.showRadioDetails(radio)
+        self.showRadioDetails(loadedRadios)
         self.logger.debug("[%s]=============================================================" % self.loggerName)
 
     # method for fetching radio list
     def parseRadio(self, response):
         self.logger.debug("[%s] Fetching latest Radio from 'www.saavn.com'" % self.loggerName)
         self.fetchLatestRadio(response.text)
+
