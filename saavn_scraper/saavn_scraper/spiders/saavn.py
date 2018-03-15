@@ -45,7 +45,9 @@ class SaavnSpider(scrapy.Spider):
 
     def parseAlbums(self, response):
         self.logger.debug("[%s] Fetching latest movie titles from 'www.saavn.com'" % self.loggerName)
-      
+        albumList = self.fetchLatestAlbums(response.text)
+        for album in albumList:
+            yield album
 
     def fetchLatestRadio(self, response):
         self.logger.debug("[%s]=====================Saavn Radio list ========================================" % self.loggerName)
