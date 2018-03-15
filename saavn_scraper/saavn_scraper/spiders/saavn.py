@@ -18,6 +18,7 @@ class SaavnSpider(scrapy.Spider):
 
     def start_requests(self):
         yield scrapy.FormRequest('https://www.saavn.com/new-releases/hindi', callback=self.parseAlbums)
+
         yield scrapy.FormRequest('https://www.saavn.com/radio/hindi', callback=self.parseRadio)
 
     def showAlbumDetails(self, album):
@@ -29,6 +30,7 @@ class SaavnSpider(scrapy.Spider):
 
     def fetchLatestAlbums(self, text):
         self.logger.debug("[%s]=============================================================" % self.loggerName)
+        albumList = []
         # fetch albums details
         albumData = Selector(text=text).xpath('//div[contains(@class, "album-details")]').extract()
         for num, album_detail in enumerate(albumData):
@@ -36,13 +38,14 @@ class SaavnSpider(scrapy.Spider):
             albm = Selector(text=album_detail)
             # load data to items
             album['num'], album['title'], album['artist'] = num+1, albm.xpath('//p/text()').extract_first(), albm.xpath('//span/text()').extract_first()
-
+            albumList.append(album)
             self.showAlbumDetails(album)
         self.logger.debug("[%s]=============================================================" % self.loggerName)
+        return albumList
 
     def parseAlbums(self, response):
         self.logger.debug("[%s] Fetching latest movie titles from 'www.saavn.com'" % self.loggerName)
-        self.fetchLatestAlbums(response.text)
+      
 
     def fetchLatestRadio(self, response):
         self.logger.debug("[%s]=====================Saavn Radio list ========================================" % self.loggerName)
