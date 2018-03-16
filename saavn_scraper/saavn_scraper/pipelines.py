@@ -5,20 +5,26 @@
 # Don't forget to add your pipeline to the ITEM_PIPELINES setting
 # See: https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 import json
+from itemModels.album import *
 
-output_json = 'output/album.json'
+output_album_json = 'output/album.json'
 
-class AlbumPipeline(object):
+
+
+class SaavnPipeline(object):
+
+
 
     def open_spider(self, spider):
         print("opening spider...")
-        self.file = open(output_json, 'wb')
+        self.album_file= open(output_album_json, 'wb')
+        self.radio_file = open(output_radio_json, 'wb')
 
     def process_item(self, item, spider):
         line = json.dumps(dict(item)) + "\n"
-        self.file.write(line)
+
         return item
 
     def close_spider(self, spider):
         print('closing spider..')
-        self.file.close()
+
