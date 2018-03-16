@@ -64,9 +64,9 @@ ROBOTSTXT_OBEY = True
 
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
-ITEM_PIPELINES = {
-    'saavn_scraper.pipelines.AlbumPipeline': 300,
-}
+#ITEM_PIPELINES = {
+#    'saavn_scraper.pipelines.SaavncPipeline': 300,
+#}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://doc.scrapy.org/en/latest/topics/autothrottle.html
@@ -88,3 +88,10 @@ ITEM_PIPELINES = {
 #HTTPCACHE_DIR = 'httpcache'
 #HTTPCACHE_IGNORE_HTTP_CODES = []
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
+
+
+# FEED settings
+FEED_URI = "feed.csv"
+FEED_FORMAT = "CSV"
+FEED_EXPORT_FIELDS = ["num", "title", "artist"]
+FEED_EXPORT_ENCODING = "utf-8"
