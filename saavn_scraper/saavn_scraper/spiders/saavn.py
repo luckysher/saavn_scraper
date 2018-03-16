@@ -65,4 +65,5 @@ class SaavnSpider(scrapy.Spider):
     # method for fetching radio list
     def parseRadio(self, response):
         self.logger.debug("[%s] Fetching latest Radio from 'www.saavn.com'" % self.loggerName)
-     
+        loadedRadio = self.fetchLatestRadio(response)
+        yield loadedRadio
