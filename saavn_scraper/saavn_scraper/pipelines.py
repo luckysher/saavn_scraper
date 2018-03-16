@@ -27,4 +27,5 @@ class SaavnPipeline(object):
 
     def close_spider(self, spider):
         print('closing spider..')
-
+        self.album_file.close()
+        self.radio_file.close()
