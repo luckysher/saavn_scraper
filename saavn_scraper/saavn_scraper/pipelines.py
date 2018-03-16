@@ -8,7 +8,7 @@ import json
 from itemModels.album import *
 
 output_album_json = 'output/album.json'
-
+output_radio_json = 'output/radio.json'
 
 
 class SaavnPipeline(object):
@@ -24,7 +24,7 @@ class SaavnPipeline(object):
 
     def process_item(self, item, spider):
         line = json.dumps(dict(item)) + "\n"
-
+       
         return item
 
     def close_spider(self, spider):
