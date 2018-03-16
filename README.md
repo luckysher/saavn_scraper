@@ -23,10 +23,16 @@ OUTPUT item example :
 Generated Feed example:
 ------------------------
 
-num,title,artist \n
-1,Sabar,Shadow and Light \n
-2,Heer,2018 \n
-3,Raid,Tanishk Bagchi\n
-4,Hate Story IV,Tanishk Bagchi\n
-5,Dil Jaane Na,Abhishek Arora\n
-6,Vibe,The PropheC\n
+num,title,artist
+
+1,Sabar,Shadow and Light
+
+2,Heer,2018
+
+3,Raid,Tanishk Bagchi
+
+4,Hate Story IV,Tanishk Bagchi
+
+5,Dil Jaane Na,Abhishek Arora
+
+6,Vibe,The PropheC
