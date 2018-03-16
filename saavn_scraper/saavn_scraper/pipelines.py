@@ -24,7 +24,10 @@ class SaavnPipeline(object):
 
     def process_item(self, item, spider):
         line = json.dumps(dict(item)) + "\n"
-       
+        if isinstance(item, Radio):
+            self.radio_file.write(line)
+        if isinstance(item, Album):
+            self.album_file.write(line)
         return item
 
     def close_spider(self, spider):
