@@ -18,3 +18,15 @@ OUTPUT item example :
 {"title": "Haq Hai", "num": 11, "artist": "Shreyas Puranik"}
 {"title": "Hichki", "num": 12, "artist": "Jasleen Royal"}
 {"title": "Naina", "num": 13, "artist": "2018"}
+
+
+Generated Feed example:
+------------------------
+
+num,title,artist
+1,Sabar,Shadow and Light
+2,Heer,2018
+3,Raid,Tanishk Bagchi
+4,Hate Story IV,Tanishk Bagchi
+5,Dil Jaane Na,Abhishek Arora
+6,Vibe,The PropheC
