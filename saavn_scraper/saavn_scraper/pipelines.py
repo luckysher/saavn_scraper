@@ -13,7 +13,9 @@ output_album_json = 'output/album.json'
 
 class SaavnPipeline(object):
 
-
+    def __init__(self):
+        self.radio_file = None
+        self.album_file = None
 
     def open_spider(self, spider):
         print("opening spider...")
